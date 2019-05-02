@@ -20,8 +20,12 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     dataBinding {
@@ -46,4 +50,6 @@ dependencies {
 
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'com.google.android.material:material:1.0.0'
+
+    implementation 'com.ramotion.paperonboarding:paper-onboarding:1.1.3'
 }

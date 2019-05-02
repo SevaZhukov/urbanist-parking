@@ -3,4 +3,11 @@
     <color name="colorPrimary">#D34D4D</color>
     <color name="colorPrimaryDark">#923737</color>
     <color name="colorAccent">#1B70D8</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="onboard_1">#59a5db</color>
+    <color name="onboard_2">#77b676</color>
+    <color name="onboard_3">#49b4ad</color>
+    <color name="onboard_4">#f6a860</color>
+    <color name="onboard_5">#d690c3</color>
 </resources>
