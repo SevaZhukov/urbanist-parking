@@ -1,17 +1,25 @@
 package com.urbanist.parking.core.dagger
 
-import com.urbanist.parking.core.dagger.module.ContextModule
-import com.urbanist.parking.core.dagger.module.FireModule
-import com.urbanist.parking.feature.report.ReportActivity
+import android.content.Context
+import com.urbanist.parking.core.App
+import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjector
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ContextModule::class, FireModule::class])
-interface AppComponent {
-    fun inject(reportActivity: ReportActivity)
+@Component(modules = [ApplicationModule::class])
+@ApplicationScope
+interface ApplicationComponent : AndroidInjector<App> {
 
-    companion object {
-        lateinit var instance: AppComponent
+    @Component.Builder
+    abstract class Builder : AndroidInjector.Builder<App>() {
+
+        @BindsInstance
+        abstract fun context(context: Context): Builder
+
+        @BindsInstance
+        abstract fun baseUrl(@Named("baseUrl") baseUrl: String): Builder
     }
 }

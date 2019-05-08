@@ -2,10 +2,7 @@ package com.urbanist.parking.feature.main
 
 import android.Manifest
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.Preference
 import android.preference.PreferenceManager
 import com.urbanist.parking.R
 import com.urbanist.parking.feature.rules.RulesActivity
@@ -15,11 +12,12 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.listener.PermissionRequest
+import com.urbanist.parking.core.presentation.BaseActivity
 import com.urbanist.parking.feature.onboarding.OnBoardingActivity
 import com.urbanist.parking.feature.report.ReportActivity
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
