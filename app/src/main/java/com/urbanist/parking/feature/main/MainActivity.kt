@@ -4,24 +4,26 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
-import com.urbanist.parking.R
-import com.urbanist.parking.feature.rules.RulesActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.urbanist.parking.R
 import com.urbanist.parking.core.presentation.BaseActivity
+import com.urbanist.parking.databinding.ActivityMainBinding
 import com.urbanist.parking.feature.onboarding.OnBoardingActivity
 import com.urbanist.parking.feature.report.ReportActivity
+import com.urbanist.parking.feature.rules.RulesActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    override val layoutId: Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         rulesButton.setOnClickListener {
             startActivity(Intent(this, RulesActivity::class.java))
         }

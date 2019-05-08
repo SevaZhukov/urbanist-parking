@@ -3,18 +3,19 @@ package com.urbanist.parking.feature.onboarding
 import android.os.Bundle
 import com.ramotion.paperonboarding.PaperOnboardingPage
 import java.util.ArrayList
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.urbanist.parking.R
 import com.urbanist.parking.core.presentation.BaseActivity
+import com.urbanist.parking.databinding.ActivityOnboardingBinding
 import com.urbanist.parking.feature.onboarding.paper.UPaperOnboardingFragment
 
 
-class OnBoardingActivity : BaseActivity() {
+class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
+
+    override val layoutId: Int = R.layout.activity_onboarding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_onboarding)
         setOnBoarding()
     }
 
