@@ -18,10 +18,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.urbanist.parking.core.presentation.BaseActivity
+import com.urbanist.parking.databinding.ActivityReportBinding
 import com.urbanist.parking.feature.recomendation.RecommendationActivity
 
 
-class ReportActivity : BaseActivity() {
+class ReportActivity : BaseActivity<ActivityReportBinding>() {
+    override val layoutId: Int = R.layout.activity_report
+
 
 ////    @Inject
 ////    lateinit var fireStore: FirebaseFirestore
