@@ -6,10 +6,11 @@ import java.util.ArrayList
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.urbanist.parking.R
+import com.urbanist.parking.core.presentation.BaseActivity
 import com.urbanist.parking.feature.onboarding.paper.UPaperOnboardingFragment
 
 
-class OnBoardingActivity : AppCompatActivity() {
+class OnBoardingActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

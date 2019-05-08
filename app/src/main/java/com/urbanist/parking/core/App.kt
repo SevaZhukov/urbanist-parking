@@ -1,16 +1,15 @@
 package com.urbanist.parking.core
 
-import android.app.Application
-import com.urbanist.parking.core.dagger.AppComponent
-import com.urbanist.parking.core.dagger.DaggerAppComponent
-import com.urbanist.parking.core.dagger.module.ContextModule
+import com.urbanist.parking.core.dagger.DaggerApplicationComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class App : Application() {
+class App : DaggerApplication() {
 
-    override fun onCreate() {
-        super.onCreate()
-        AppComponent.instance = DaggerAppComponent.builder()
-            .contextModule(ContextModule(applicationContext))
-            .build()
-    }
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+        DaggerApplicationComponent
+            .builder()
+            .context(this)
+            .baseUrl("https://8nkn3pvgs0.execute-api.us-east-1.amazonaws.com/prod/")
+            .create(this)
 }
