@@ -2,6 +2,8 @@ package com.urbanist.parking.core.dagger
 
 import android.content.Context
 import com.urbanist.parking.core.App
+import com.urbanist.parking.core.dagger.module.ApplicationModule
+import com.urbanist.parking.core.dagger.scope.ApplicationScope
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

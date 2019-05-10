@@ -1,4 +1,4 @@
-package com.urbanist.parking.core.dagger
+package com.urbanist.parking.core.dagger.scope
 
 import javax.inject.Scope
 
