@@ -16,9 +16,21 @@ import com.urbanist.parking.feature.onboarding.OnBoardingActivity
 import com.urbanist.parking.feature.report.ReportActivity
 import com.urbanist.parking.feature.rules.RulesActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    @Inject
+    lateinit var mainViewModel: MainViewModel
+
+    override fun initBinding() {
+        requireBinding().mainViewModel = mainViewModel
+    }
+
+    override fun initViewModel(state: Bundle?) {
+        mainViewModel.onBind()
+    }
 
     override val layoutId: Int = R.layout.activity_main
 
@@ -56,5 +68,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
                 }
             }).check()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mainViewModel.onUnbind()
     }
 }

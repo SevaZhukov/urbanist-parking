@@ -1,16 +1,24 @@
 package com.urbanist.parking.feature.onboarding
 
 import android.os.Bundle
-import com.ramotion.paperonboarding.PaperOnboardingPage
-import java.util.ArrayList
 import androidx.core.content.ContextCompat
+import com.ramotion.paperonboarding.PaperOnboardingPage
 import com.urbanist.parking.R
 import com.urbanist.parking.core.presentation.BaseActivity
 import com.urbanist.parking.databinding.ActivityOnboardingBinding
 import com.urbanist.parking.feature.onboarding.paper.UPaperOnboardingFragment
+import java.util.*
 
 
 class OnBoardingActivity : BaseActivity<ActivityOnboardingBinding>() {
+
+    override fun initBinding() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun initViewModel(state: Bundle?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override val layoutId: Int = R.layout.activity_onboarding
 
