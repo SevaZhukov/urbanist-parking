@@ -15,4 +15,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Urbanist.Button" parent="TextAppearance.AppCompat.Button">
+        <item name="android:layout_width">@dimen/button_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/gotham_pro_family</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Urbanist.Text" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/gotham_pro_family</item>
+    </style>
+
+    <style name="Urbanist.Text.Title" parent="Urbanist.Text">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Urbanist.Text.Description.Photo" parent="Urbanist.Text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
 </resources>
