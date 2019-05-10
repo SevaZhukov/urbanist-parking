@@ -2,24 +2,24 @@
 
 buildscript {
     ext {
-        kotlin_version = 'ic_icon.ic_report_photo_2.31'
-        rxJava2_version = 'ic_report_photo_1.ic_report_photo_1.0'
-        rxKotlin_version = 'ic_report_photo_1.ic_report_photo_2.0'
-        room_version = 'ic_icon.ic_icon.ic_icon'
-        rxAndroid_version = 'ic_report_photo_1.0.ic_icon'
-        dagger2_version = 'ic_report_photo_1.18'
-        retrofit2_version = 'ic_report_photo_1.5.0'
-        paper_onboarding_version = 'ic_icon.ic_icon.ic_report_photo_2'
+        kotlin_version = '1.3.31'
+        rxJava2_version = '2.2.0'
+        rxKotlin_version = '2.3.0'
+        room_version = '1.1.1'
+        rxAndroid_version = '2.0.1'
+        dagger2_version = '2.18'
+        retrofit2_version = '2.5.0'
+        paper_onboarding_version = '1.1.3'
     }
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:ic_report_photo_2.ic_report_photo_3.0'
+        classpath 'com.android.tools.build:gradle:3.4.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.gms:google-services:ic_report_photo_3.ic_report_photo_1.0'
+        classpath 'com.google.gms:google-services:4.2.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
