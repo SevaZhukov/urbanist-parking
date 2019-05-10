@@ -1,81 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
 
-            <ProgressBar
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/progressBar"
-                    android:layout_gravity="center"
-                    android:visibility="visible"/>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
 
-                <include
-                        android:layout_marginTop="16dp"
-                        app:desc="@string/report_desc_1"
-                        app:icon="@drawable/ic_report_photo_1"
-                        layout="@layout/include_photo"
-                        tools:ignore="IncludeLayoutParam"/>
-                <include
-                        android:layout_marginTop="16dp"
-                        app:desc="@string/report_desc_2"
-                        app:icon="@drawable/ic_report_photo_2"
-                        layout="@layout/include_photo"
-                        android:layout_margin="16dp"
-                        tools:ignore="IncludeLayoutParam"/>
-                <include
-                        android:layout_marginTop="16dp"
-                        app:desc="@string/report_desc_3"
-                        app:icon="@drawable/ic_report_photo_3"
-                        layout="@layout/include_photo"
-                        tools:ignore="IncludeLayoutParam"/>
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:id="@+id/textInputLayout">
+			<ProgressBar
+				android:id="@+id/progressBar"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:visibility="gone"
+				style="?android:attr/progressBarStyle"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/comment"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Комментарий"/>
-                </com.google.android.material.textfield.TextInputLayout>
-                <TextView
-                        android:text="@string/report_text_auto_location"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView4" app:layout_constraintStart_toStartOf="@+id/sendButton"
-                        app:layout_constraintEnd_toEndOf="@+id/sendButton"
-                        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" android:layout_marginTop="16dp"/>
-                <Button
-                        android:text="Отправить"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/sendButton"
-                        android:enabled="false"
-                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"
-                        app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
-                        style="@style/Widget.AppCompat.Button.Colored"
-                        app:layout_constraintTop_toBottomOf="@+id/textView4"
-                        android:layout_marginTop="16dp"/>
-            </LinearLayout>
-        </FrameLayout>
-    </ScrollView>
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:gravity="center_horizontal">
+
+				<include
+					layout="@layout/include_photo"
+					android:layout_marginTop="16dp"
+					app:desc="@{@string/report_desc_1}"
+					app:icon="@drawable/ic_report_photo_1"
+					tools:ignore="IncludeLayoutParam"/>
+
+				<include
+					layout="@layout/include_photo"
+					android:layout_margin="16dp"
+					android:layout_marginTop="16dp"
+					app:desc="@{@string/report_desc_2}"
+					app:icon="@drawable/ic_report_photo_2"
+					tools:ignore="IncludeLayoutParam"/>
+
+				<include
+					layout="@layout/include_photo"
+					android:layout_marginTop="16dp"
+					app:desc="@{@string/report_desc_3}"
+					app:icon="@drawable/ic_report_photo_3"
+					tools:ignore="IncludeLayoutParam"/>
+
+				<com.google.android.material.textfield.TextInputLayout
+					android:id="@+id/textInputLayout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="24dp"
+					android:layout_marginStart="24dp"
+					android:layout_marginTop="16dp"
+					app:layout_constraintStart_toStartOf="parent">
+
+					<com.google.android.material.textfield.TextInputEditText
+						android:id="@+id/comment"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:hint="@string/report_comment_field_hint"/>
+				</com.google.android.material.textfield.TextInputLayout>
+
+				<TextView
+					android:id="@+id/textView4"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="24dp"
+					android:layout_marginStart="24dp"
+					android:layout_marginTop="16dp"
+					android:text="@string/report_text_auto_location"/>
+
+				<Button
+					android:id="@+id/sendButton"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginBottom="24dp"
+					android:layout_marginEnd="24dp"
+					android:layout_marginStart="24dp"
+					android:layout_marginTop="16dp"
+					android:text="@string/report_send_button_text"
+					android:enabled="false"
+					android:background="@drawable/button_red_background"
+					style="@style/Urbanist.Button"/>
+			</LinearLayout>
+		</FrameLayout>
+	</ScrollView>
 </layout>
