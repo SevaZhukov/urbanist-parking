@@ -9,10 +9,11 @@ abstract class BaseActivity<DB : ViewDataBinding> : DaggerAppCompatActivity() {
 
     abstract val layoutId: Int
 
-    protected lateinit var binding: DB
+    private lateinit var binding: DB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(layoutId)
 
         binding = DataBindingUtil.setContentView(this, layoutId)
         binding.lifecycleOwner = this
