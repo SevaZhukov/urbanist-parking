@@ -2,6 +2,7 @@
 	<string name="app_name">Урбанист.Парковка</string>
 
 	<!-- RulesActivity -->
+	<string name="rules_title">Правила парковки</string>
 	<string name="rules">"Тротуар" - элемент дороги, предназначенный для движения пешеходов и примыкающий к проезжей
         части или к велосипедной дорожке либо отделенный от них газоном.\n\n
         Закон запрещает движение ТС по тротуарам, и ограничивает парковку на них.\n
@@ -51,6 +52,7 @@
     </string>
 
 	<!-- ReportActivity -->
+	<string name="report_title">Создание отчета</string>
 	<string name="report_desc_1">Нажми, чтобы сделать первое фото</string>
 	<string name="report_desc_2">Нажми, чтобы сделать второе фото</string>
 	<string name="report_desc_3">Нажми, чтобы сделать третье фото</string>

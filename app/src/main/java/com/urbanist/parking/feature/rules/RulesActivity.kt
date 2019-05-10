@@ -1,18 +1,12 @@
 package com.urbanist.parking.feature.rules
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.urbanist.parking.R
-import com.urbanist.parking.core.presentation.BaseActivity
-import com.urbanist.parking.databinding.ActivityRulesBinding
 
-class RulesActivity : BaseActivity<ActivityRulesBinding>() {
-    override fun initBinding() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+class RulesActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_rules)
     }
-
-    override fun initViewModel(state: Bundle?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override val layoutId: Int = R.layout.activity_rules
 }

@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="com.urbanist.parking">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <application
-            android:allowBackup="true"
-            android:icon="@drawable/icon"
-            android:label="@string/app_name"
-            android:roundIcon="@drawable/icon"
-            android:supportsRtl="true"
-            android:name=".core.App"
-            android:theme="@style/AppTheme"
-            tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".feature.main.MainActivity"
-                  android:theme="@style/AppThemeNoBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+	xmlns:tools="http://schemas.android.com/tools"
+	package="com.urbanist.parking">
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".feature.rules.RulesActivity"/>
-        <activity android:name=".feature.recomendation.RecommendationActivity"/>
-        <activity android:name=".feature.report.ReportActivity"
-                  android:parentActivityName=".feature.main.MainActivity"/>
-        <activity android:name=".feature.onboarding.OnBoardingActivity"
-                  android:theme="@style/Theme.AppCompat.NoActionBar"/>
-    </application>
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+	<application
+		android:name=".core.App"
+		android:allowBackup="true"
+		android:icon="@drawable/icon"
+		android:label="@string/app_name"
+		android:roundIcon="@drawable/icon"
+		android:supportsRtl="true"
+		android:theme="@style/AppTheme"
+		tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+		<activity
+			android:name=".feature.main.MainActivity"
+			android:theme="@style/AppThemeNoBar">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".feature.rules.RulesActivity"
+			android:label="@string/main_button_rules"
+			android:parentActivityName=".feature.main.MainActivity"/>
+		<activity android:name=".feature.recomendation.RecommendationActivity"/>
+		<activity
+			android:name=".feature.report.ReportActivity"
+			android:label="@string/report_title"
+			android:parentActivityName=".feature.main.MainActivity"/>
+		<activity
+			android:name=".feature.onboarding.OnBoardingActivity"
+			android:theme="@style/Theme.AppCompat.NoActionBar"/>
+	</application>
 
 </manifest>

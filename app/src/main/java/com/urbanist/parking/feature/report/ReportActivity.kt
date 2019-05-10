@@ -1,21 +1,40 @@
 package com.urbanist.parking.feature.report
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import com.urbanist.parking.R
 import com.urbanist.parking.core.presentation.BaseActivity
 import com.urbanist.parking.databinding.ActivityReportBinding
-
+import javax.inject.Inject
+import android.view.MenuItem
+import com.urbanist.parking.feature.recomendation.RecommendationActivity
 
 class ReportActivity : BaseActivity<ActivityReportBinding>() {
 
-    override val layoutId: Int = R.layout.activity_report
+    @Inject
+    lateinit var viewModel: ReportViewModel
+
+    override val layoutId: Int = com.urbanist.parking.R.layout.activity_report
 
     override fun initBinding() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        requireBinding().viewModel = viewModel
     }
 
     override fun initViewModel(state: Bundle?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        viewModel.onBind()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.recommendation_item -> startActivity(Intent(this, RecommendationActivity::class.java))
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.report_menu, menu)
+        return true
     }
 /*
 
