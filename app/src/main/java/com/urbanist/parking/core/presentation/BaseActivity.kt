@@ -7,15 +7,29 @@ import dagger.android.support.DaggerAppCompatActivity
 
 abstract class BaseActivity<DB : ViewDataBinding> : DaggerAppCompatActivity() {
 
-    abstract val layoutId: Int
+    protected abstract val layoutId: Int
 
-    private lateinit var binding: DB
+    protected abstract fun initBinding()
+
+    protected abstract fun initViewModel(state: Bundle?)
+
+    var binding: DB? = null
+
+    fun requireBinding(): DB = requireNotNull(binding)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutId)
 
         binding = DataBindingUtil.setContentView(this, layoutId)
-        binding.lifecycleOwner = this
+        binding?.lifecycleOwner = this
+
+        initViewModel(savedInstanceState)
+        initBinding()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

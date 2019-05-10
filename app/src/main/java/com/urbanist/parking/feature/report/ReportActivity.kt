@@ -1,30 +1,23 @@
 package com.urbanist.parking.feature.report
 
-import android.app.Activity
 import android.os.Bundle
 import com.urbanist.parking.R
-import kotlinx.android.synthetic.main.activity_report.*
-import android.provider.MediaStore
-import android.content.Intent
-import android.graphics.Bitmap
-import android.location.Location
-import android.util.Log
-import android.widget.ImageView
-import android.widget.Toast
-import javax.inject.Inject
-import java.io.ByteArrayOutputStream
-import com.urbanist.parking.feature.report.MyLocation.LocationResult
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import com.urbanist.parking.core.presentation.BaseActivity
 import com.urbanist.parking.databinding.ActivityReportBinding
-import com.urbanist.parking.feature.recomendation.RecommendationActivity
 
 
 class ReportActivity : BaseActivity<ActivityReportBinding>() {
+
     override val layoutId: Int = R.layout.activity_report
 
+    override fun initBinding() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun initViewModel(state: Bundle?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+/*
 
     private var thumbnail: Bitmap? = null
     private var thumbnailSecond: Bitmap? = null
@@ -53,10 +46,10 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
             openCamera(0)
         }
         imageViewSecond.setOnClickListener {
-            openCamera(1)
+            openCamera(ic_icon)
         }
         imageViewThird.setOnClickListener {
-            openCamera(2)
+            openCamera(ic_report_photo_1)
         }
         sendButton.setOnClickListener {
             sendReport()
@@ -76,8 +69,8 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
                 val bitmap = data?.extras?.get("data") as Bitmap
                 when (currentPhoto) {
                     0 -> thumbnail = bitmap
-                    1 -> thumbnailSecond = bitmap
-                    2 -> thumbnailThird = bitmap
+                    ic_icon -> thumbnailSecond = bitmap
+                    ic_report_photo_1 -> thumbnailThird = bitmap
                 }
                 imageView.setImageBitmap(thumbnail)
                 imageViewSecond.setImageBitmap(thumbnailSecond)
@@ -146,5 +139,5 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
 
     companion object {
         const val CAMERA_PIC_REQUEST = 20000
-    }
+    }*/
 }
