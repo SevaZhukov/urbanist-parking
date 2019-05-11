@@ -16,6 +16,10 @@
 		<variable
 			name="icon"
 			type="android.graphics.drawable.Drawable"/>
+
+		<variable
+			name="image"
+			type="android.graphics.Bitmap"/>
 	</data>
 
 	<androidx.constraintlayout.widget.ConstraintLayout
@@ -55,6 +59,8 @@
 
 		<ImageView
 			android:id="@+id/frame"
+			android:scaleType="centerCrop"
+			app:imageBitmap="@{image}"
 			android:layout_width="0dp"
 			android:layout_height="200dp"
 			android:background="@drawable/frame"

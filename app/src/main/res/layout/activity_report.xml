@@ -34,6 +34,8 @@
 				android:gravity="center_horizontal">
 
 				<include
+					app:clickCallback="@{() -> viewModel.onPhotoClick(0)}"
+					app:image="@{viewModel.firstPhoto}"
 					android:id="@+id/firstPhoto"
 					layout="@layout/include_photo"
 					app:desc="@{@string/report_desc_1}"
@@ -41,6 +43,8 @@
 					tools:ignore="IncludeLayoutParam"/>
 
 				<include
+					app:clickCallback="@{() -> viewModel.onPhotoClick(1)}"
+					app:image="@{viewModel.secondPhoto}"
 					android:id="@+id/secondPhoto"
 					layout="@layout/include_photo"
 					app:desc="@{@string/report_desc_2}"
@@ -48,6 +52,8 @@
 					tools:ignore="IncludeLayoutParam"/>
 
 				<include
+					app:clickCallback="@{() -> viewModel.onPhotoClick(2)}"
+					app:image="@{viewModel.thirdPhoto}"
 					android:id="@+id/thirdPhoto"
 					layout="@layout/include_photo"
 					app:desc="@{@string/report_desc_3}"
@@ -89,7 +95,7 @@
 					android:layout_marginStart="24dp"
 					android:layout_marginTop="16dp"
 					android:text="@string/report_send_button_text"
-					android:enabled="false"
+					android:enabled="@{viewModel.sendButtonEnable}"
 					android:background="@drawable/button_red_background"
 					style="@style/Urbanist.Button"/>
 			</LinearLayout>
