@@ -1,30 +1,36 @@
 package com.urbanist.parking.feature.report
 
 import android.graphics.Bitmap
+import android.location.Location
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.urbanist.parking.core.presentation.BaseViewModel
+import com.urbanist.parking.feature.report.domain.interactor.ReportService
+import com.urbanist.parking.feature.report.domain.model.Report
+import io.reactivex.rxkotlin.addTo
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
-class ReportViewModel @Inject constructor() : BaseViewModel() {
+class ReportViewModel @Inject constructor(private val reportService: ReportService) : BaseViewModel() {
 
 	val firstPhoto = MutableLiveData<Bitmap?>()
 	val secondPhoto = MutableLiveData<Bitmap?>()
 	val thirdPhoto = MutableLiveData<Bitmap?>()
+
+	val comment = MutableLiveData<String>()
 
 	val sendButtonEnable = MediatorLiveData<Boolean>()
 
 	lateinit var eventsListener: EventsListener
 
 	init {
-		firstPhoto.value = null
-		secondPhoto.value = null
-		thirdPhoto.value = null
+		clearForm()
 
 		sendButtonEnable.apply {
-			addSource(firstPhoto) { it != null }
-			addSource(secondPhoto) { it != null }
-			addSource(thirdPhoto) { it != null }
+			addSource(firstPhoto) { it != null && this.value ?: false}
+			addSource(secondPhoto) { it != null && this.value ?: false}
+			addSource(thirdPhoto) { it != null && this.value ?: false}
+			addSource(comment) { it != "" && this.value ?: false}
 		}
 	}
 
@@ -40,17 +46,54 @@ class ReportViewModel @Inject constructor() : BaseViewModel() {
 		eventsListener.getPhoto(i)
 	}
 
+	fun onSendReportButtonClick() {
+		val first64 = bitmapToBase64String(firstPhoto.value ?: return)
+		val second64 = bitmapToBase64String(secondPhoto.value ?: return)
+		val third64 = bitmapToBase64String(thirdPhoto.value ?: return)
+		val images64 = arrayListOf(first64, second64, third64)
+		val location = eventsListener.getLocation()
+		val report = Report(location.latitude, location.longitude, comment.value.orEmpty(), images64)
+		reportService.sendReport(report)
+			.subscribe(
+				{
+					clearForm()
+					eventsListener.showSuccessMessage()
+				},
+				{
+					eventsListener.showMessage(it.localizedMessage)
+				}
+			).addTo(disposables)
+	}
+
+	private fun clearForm() {
+		firstPhoto.value = null
+		secondPhoto.value = null
+		thirdPhoto.value = null
+		comment.value = ""
+	}
+
+	private fun bitmapToBase64String(bitmap: Bitmap): String {
+		val baos = ByteArrayOutputStream()
+		bitmap.compress(Bitmap.CompressFormat.JPEG, QUALITY_COMPRESS_BITMAP, baos)
+		return baos.toByteArray().toString()
+	}
+
 	fun setEventListener(eventsListener: EventsListener) {
 		this.eventsListener = eventsListener
 	}
 
 	interface EventsListener {
 		fun getPhoto(i: Int)
+		fun getLocation(): Location
+		fun showMessage(message: String)
+		fun showSuccessMessage()
 	}
 
 	companion object {
 		const val FIRST_PHOTO_ID = 0
 		const val SECOND_PHOTO_ID = 1
 		const val THIRD_PHOTO_ID = 2
+
+		const val QUALITY_COMPRESS_BITMAP = 100
 	}
 }
