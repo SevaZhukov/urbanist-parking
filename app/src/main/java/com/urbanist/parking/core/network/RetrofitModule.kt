@@ -1,5 +1,6 @@
 package com.urbanist.parking.core.network
 
+import com.urbanist.parking.BuildConfig
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -20,11 +21,9 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun providesRetrofit(
-        @Named("baseUrl") baseUrl: String
-    ): Retrofit =
+    fun providesRetrofit(): Retrofit =
         Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(BuildConfig.BACKEND_ENDPOINT)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
