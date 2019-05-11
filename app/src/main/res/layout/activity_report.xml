@@ -4,6 +4,13 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools">
 
+	<data>
+
+		<variable
+			name="viewModel"
+			type="com.urbanist.parking.feature.report.ReportViewModel"/>
+	</data>
+
 	<ScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
@@ -28,24 +35,20 @@
 
 				<include
 					layout="@layout/include_photo"
-					android:layout_marginTop="16dp"
 					app:desc="@{@string/report_desc_1}"
-					app:icon="@drawable/ic_report_photo_1"
+					app:icon="@{@drawable/ic_report_photo_1}"
 					tools:ignore="IncludeLayoutParam"/>
 
 				<include
 					layout="@layout/include_photo"
-					android:layout_margin="16dp"
-					android:layout_marginTop="16dp"
 					app:desc="@{@string/report_desc_2}"
-					app:icon="@drawable/ic_report_photo_2"
+					app:icon="@{@drawable/ic_report_photo_2}"
 					tools:ignore="IncludeLayoutParam"/>
 
 				<include
 					layout="@layout/include_photo"
-					android:layout_marginTop="16dp"
 					app:desc="@{@string/report_desc_3}"
-					app:icon="@drawable/ic_report_photo_3"
+					app:icon="@{@drawable/ic_report_photo_3}"
 					tools:ignore="IncludeLayoutParam"/>
 
 				<com.google.android.material.textfield.TextInputLayout
@@ -54,13 +57,13 @@
 					android:layout_height="wrap_content"
 					android:layout_marginEnd="24dp"
 					android:layout_marginStart="24dp"
-					android:layout_marginTop="16dp"
-					app:layout_constraintStart_toStartOf="parent">
+					android:layout_marginTop="16dp">
 
 					<com.google.android.material.textfield.TextInputEditText
 						android:id="@+id/comment"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
+						style="@style/Urbanist.Text"
 						android:hint="@string/report_comment_field_hint"/>
 				</com.google.android.material.textfield.TextInputLayout>
 
@@ -71,6 +74,7 @@
 					android:layout_marginEnd="24dp"
 					android:layout_marginStart="24dp"
 					android:layout_marginTop="16dp"
+					style="@style/Urbanist.Text"
 					android:text="@string/report_text_auto_location"/>
 
 				<Button

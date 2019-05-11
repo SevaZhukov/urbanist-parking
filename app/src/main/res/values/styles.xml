@@ -4,12 +4,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/gotham_pro_family</item>
     </style>
 
     <style name="AppThemeNoBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/gotham_pro_family</item>
     </style>
 
     <style name="Urbanist.Button" parent="TextAppearance.AppCompat.Button">
@@ -29,6 +31,11 @@
     </style>
 
     <style name="Urbanist.Text.Description.BigText" parent="Urbanist.Text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Urbanist.Text.EditText" parent="Urbanist.Text">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
