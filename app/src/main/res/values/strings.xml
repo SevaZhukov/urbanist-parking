@@ -64,4 +64,8 @@
 	<string name="main_button_send_report">Сообщить о нарушении</string>
 	<string name="main_button_rules">Правила парковки</string>
 	<string name="main_title">Урбанист.Парковка</string>
+
+	<!-- Dialog -->
+	<string name="dialog_loc_permission_desc">Для перехода к созданию отчета разрешите приложению определять вашу локацию в настройках приложения</string>
+	<string name="ok_button_text">OK</string>
 </resources>
