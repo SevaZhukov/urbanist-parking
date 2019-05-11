@@ -59,6 +59,7 @@
 	<string name="report_text_auto_location">Местоположения нарушения определяется автоматически</string>
 	<string name="report_comment_field_hint">Комментарий</string>
 	<string name="report_send_button_text">Отправить</string>
+	<string name="report_success">Репорт успешно отправлен!</string>
 
 	<!-- MainActivity -->
 	<string name="main_button_send_report">Сообщить о нарушении</string>

@@ -9,6 +9,7 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Message
 import android.provider.MediaStore
 import android.view.Menu
 import com.urbanist.parking.R
@@ -16,6 +17,7 @@ import com.urbanist.parking.core.presentation.BaseActivity
 import com.urbanist.parking.databinding.ActivityReportBinding
 import javax.inject.Inject
 import android.view.MenuItem
+import com.google.android.material.snackbar.Snackbar
 import com.urbanist.parking.feature.recomendation.RecommendationActivity
 import com.urbanist.parking.utils.hasNull
 import kotlinx.android.synthetic.main.activity_report.*
@@ -44,6 +46,18 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
 	private val eventsListener: ReportViewModel.EventsListener = object : ReportViewModel.EventsListener {
 		override fun getPhoto(i: Int) {
 			openCamera(i)
+		}
+
+		override fun getLocation(): Location {
+			return currentLocation
+		}
+
+		override fun showMessage(message: String) {
+			Snackbar.make(binding?.root ?: return, message, Snackbar.LENGTH_SHORT).show()
+		}
+
+		override fun showSuccessMessage() {
+			Snackbar.make(binding?.root ?: return, getString(R.string.report_success), Snackbar.LENGTH_SHORT).show()
 		}
 	}
 

@@ -73,6 +73,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						style="@style/Urbanist.Text"
+						android:text="@={viewModel.comment}"
 						android:hint="@string/report_comment_field_hint"/>
 				</com.google.android.material.textfield.TextInputLayout>
 
@@ -95,6 +96,7 @@
 					android:layout_marginStart="24dp"
 					android:layout_marginTop="16dp"
 					android:text="@string/report_send_button_text"
+					android:onClick="@{() -> viewModel.onSendReportButtonClick()}"
 					android:enabled="@{viewModel.sendButtonEnable}"
 					android:background="@drawable/button_red_background"
 					style="@style/Urbanist.Button"/>
