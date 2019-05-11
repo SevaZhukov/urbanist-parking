@@ -1,6 +1,11 @@
 package com.urbanist.parking.feature.report
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.Menu
 import com.urbanist.parking.R
@@ -9,33 +14,66 @@ import com.urbanist.parking.databinding.ActivityReportBinding
 import javax.inject.Inject
 import android.view.MenuItem
 import com.urbanist.parking.feature.recomendation.RecommendationActivity
+import kotlinx.android.synthetic.main.activity_report.*
 
 class ReportActivity : BaseActivity<ActivityReportBinding>() {
 
-    @Inject
-    lateinit var viewModel: ReportViewModel
+	var isLocationEnabled = true
+	var currentLocation = Location(LocationManager.GPS_PROVIDER)
 
-    override val layoutId: Int = com.urbanist.parking.R.layout.activity_report
+	@Inject
+	lateinit var viewModel: ReportViewModel
 
-    override fun initBinding() {
-        requireBinding().viewModel = viewModel
-    }
+	override val layoutId: Int = com.urbanist.parking.R.layout.activity_report
 
-    override fun initViewModel(state: Bundle?) {
-        viewModel.onBind()
-    }
+	override fun initBinding() {
+		requireBinding().viewModel = viewModel
+	}
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.recommendation_item -> startActivity(Intent(this, RecommendationActivity::class.java))
-        }
-        return super.onOptionsItemSelected(item)
-    }
+	override fun initViewModel(state: Bundle?) {
+		viewModel.onBind()
+	}
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.report_menu, menu)
-        return true
-    }
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		initLocationListener()
+	}
+
+	@SuppressLint("MissingPermission")
+	private fun initLocationListener() {
+		val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, locationListener)
+	}
+
+	private val locationListener = object : LocationListener {
+		override fun onLocationChanged(location: Location?) {
+			currentLocation = location ?: return
+		}
+
+		override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+
+		}
+
+		override fun onProviderEnabled(provider: String?) {
+			isLocationEnabled = true
+		}
+
+		override fun onProviderDisabled(provider: String?) {
+			isLocationEnabled = false
+		}
+	}
+
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		when (item.itemId) {
+			R.id.recommendation_item -> startActivity(Intent(this, RecommendationActivity::class.java))
+		}
+		return super.onOptionsItemSelected(item)
+	}
+
+	override fun onCreateOptionsMenu(menu: Menu): Boolean {
+		menuInflater.inflate(R.menu.report_menu, menu)
+		return true
+	}
 /*
 
     private var thumbnail: Bitmap? = null
@@ -159,4 +197,9 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
     companion object {
         const val CAMERA_PIC_REQUEST = 20000
     }*/
+
+	override fun onDestroy() {
+		super.onDestroy()
+		viewModel.onUnbind()
+	}
 }
