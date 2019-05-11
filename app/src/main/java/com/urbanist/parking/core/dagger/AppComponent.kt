@@ -3,25 +3,19 @@ package com.urbanist.parking.core.dagger
 import android.content.Context
 import com.urbanist.parking.core.App
 import com.urbanist.parking.core.dagger.module.ApplicationModule
-import com.urbanist.parking.core.dagger.scope.ApplicationScope
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [ApplicationModule::class])
-@ApplicationScope
 interface ApplicationComponent : AndroidInjector<App> {
 
-    @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<App>() {
+	@Component.Builder
+	abstract class Builder : AndroidInjector.Builder<App>() {
 
-        @BindsInstance
-        abstract fun context(context: Context): Builder
-
-        @BindsInstance
-        abstract fun baseUrl(@Named("baseUrl") baseUrl: String): Builder
-    }
+		@BindsInstance
+		abstract fun context(context: Context): Builder
+	}
 }

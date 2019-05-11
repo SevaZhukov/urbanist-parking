@@ -10,6 +10,5 @@ class App : DaggerApplication() {
         DaggerApplicationComponent
             .builder()
             .context(this)
-            .baseUrl("https://8nkn3pvgs0.execute-api.us-east-1.amazonaws.com/prod/")
             .create(this)
 }
