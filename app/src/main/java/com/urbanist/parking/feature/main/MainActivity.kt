@@ -31,12 +31,11 @@ class MainActivity : AppCompatActivity() {
 	private fun requestGeoAndCameraPermissions() {
 		Dexter.withActivity(this)
 			.withPermissions(
-				Manifest.permission.CAMERA,
 				Manifest.permission.ACCESS_FINE_LOCATION,
 				Manifest.permission.ACCESS_COARSE_LOCATION
 			).withListener(object : MultiplePermissionsListener {
 				override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-					if (report.isAnyPermissionPermanentlyDenied) {
+					if (report.deniedPermissionResponses.isEmpty().not()) {
 						showDeniedLocationDialog()
 					} else {
 						startActivity(Intent(this@MainActivity, ReportActivity::class.java))
