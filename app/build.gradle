@@ -26,7 +26,7 @@ android {
 		}
 		debug {
 			buildConfigField "String", "BACKEND_ENDPOINT", BACKEND_ENDPOINT_DEV
-			minifyEnabled false
+			minifyEnabled true
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 		}
 	}
@@ -65,4 +65,7 @@ dependencies {
 	implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
 	implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
 	implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+
+	//okhttp3
+	implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
 }
