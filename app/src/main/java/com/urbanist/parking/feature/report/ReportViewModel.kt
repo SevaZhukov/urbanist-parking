@@ -5,13 +5,13 @@ import android.location.Location
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.urbanist.parking.core.presentation.BaseViewModel
-import com.urbanist.parking.feature.report.domain.interactor.ReportService
+import com.urbanist.parking.feature.report.domain.repository.ReportRepository
 import com.urbanist.parking.feature.report.domain.model.Report
 import io.reactivex.rxkotlin.addTo
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
-class ReportViewModel @Inject constructor(private val reportService: ReportService) : BaseViewModel() {
+class ReportViewModel @Inject constructor(private val reportRepository: ReportRepository) : BaseViewModel() {
 
 	val firstPhoto = MutableLiveData<Bitmap?>()
 	val secondPhoto = MutableLiveData<Bitmap?>()
@@ -53,7 +53,7 @@ class ReportViewModel @Inject constructor(private val reportService: ReportServi
 		val images64 = arrayListOf(first64, second64, third64)
 		val location = eventsListener.getLocation()
 		val report = Report(location.latitude, location.longitude, comment.value.orEmpty(), images64)
-		reportService.sendReport(report)
+		reportRepository.sendReport(report)
 			.subscribe(
 				{
 					clearForm()

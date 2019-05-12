@@ -1,8 +1,8 @@
-package com.urbanist.parking.feature.report.domain.interactor
+package com.urbanist.parking.feature.report.domain.repository
 
 import com.urbanist.parking.feature.report.domain.model.Report
 import io.reactivex.Completable
 
-interface ReportService {
+interface ReportRepository {
 	fun sendReport(report: Report): Completable
 }
