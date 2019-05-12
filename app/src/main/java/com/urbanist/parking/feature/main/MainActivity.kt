@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 		Dexter.withActivity(this)
 			.withPermissions(
 				Manifest.permission.ACCESS_FINE_LOCATION,
-				Manifest.permission.ACCESS_COARSE_LOCATION
+				Manifest.permission.ACCESS_COARSE_LOCATION,
+				Manifest.permission.CAMERA
 			).withListener(object : MultiplePermissionsListener {
 				override fun onPermissionsChecked(report: MultiplePermissionsReport) {
 					if (report.deniedPermissionResponses.isEmpty().not()) {

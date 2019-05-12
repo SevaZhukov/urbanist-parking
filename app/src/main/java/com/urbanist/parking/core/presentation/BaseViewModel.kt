@@ -11,8 +11,6 @@ abstract class BaseViewModel {
         disposables.dispose()
     }
 
-    open fun onSaveInstanceState(state: Bundle) = Unit
-
     open fun onBind(state: Bundle? = null) = Unit
 
 }

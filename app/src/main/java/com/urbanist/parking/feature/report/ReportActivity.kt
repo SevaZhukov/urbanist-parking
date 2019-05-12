@@ -27,7 +27,6 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
 	private var isLocationEnabled = true
 	private var currentLocation = Location(LocationManager.GPS_PROVIDER)
 	private var currentPhotoId = 0
-	private var images: Array<Bitmap?> = arrayOfNulls(3)
 
 	@Inject
 	lateinit var viewModel: ReportViewModel
@@ -48,7 +47,11 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
 			openCamera(i)
 		}
 
-		override fun getLocation(): Location {
+		override fun getLocation(): Location? {
+			if (isLocationEnabled.not()) {
+				showMessage(getString(R.string.report_error_location))
+				return null
+			}
 			return currentLocation
 		}
 
@@ -113,9 +116,7 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
 		when (requestCode) {
 			CAMERA_PIC_REQUEST -> if (resultCode == Activity.RESULT_OK) {
 				val bitmap = data?.extras?.get(DATA_KEY) as Bitmap
-				images[currentPhotoId] = bitmap
 				viewModel.setBitmapToImageView(currentPhotoId, bitmap)
-				sendButton.isEnabled = images.hasNull().not()
 			}
 		}
 	}

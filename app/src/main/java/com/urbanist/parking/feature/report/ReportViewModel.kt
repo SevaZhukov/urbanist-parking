@@ -2,14 +2,13 @@ package com.urbanist.parking.feature.report
 
 import android.graphics.Bitmap
 import android.location.Location
-import androidx.lifecycle.MediatorLiveData
+import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import com.urbanist.parking.core.presentation.BaseViewModel
 import com.urbanist.parking.feature.report.domain.repository.ReportRepository
 import com.urbanist.parking.feature.report.domain.model.Report
 import io.reactivex.rxkotlin.addTo
 import java.io.ByteArrayOutputStream
-import java.util.*
 import javax.inject.Inject
 
 class ReportViewModel @Inject constructor(private val reportRepository: ReportRepository) : BaseViewModel() {
@@ -20,18 +19,19 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 
 	val comment = MutableLiveData<String>()
 
-	val sendButtonEnable = MediatorLiveData<Boolean>()
+	val sendButtonEnable = MutableLiveData<Boolean>()
 
 	lateinit var eventsListener: EventsListener
 
 	init {
 		clearForm()
+		sendButtonEnable.value = false
+	}
 
-		sendButtonEnable.apply {
-			addSource(firstPhoto) { it != null && this.value ?: false}
-			addSource(secondPhoto) { it != null && this.value ?: false}
-			addSource(thirdPhoto) { it != null && this.value ?: false}
-		}
+	private fun checkFullFields(): Boolean {
+		return firstPhoto.value != null
+			&& secondPhoto.value != null
+			&& thirdPhoto.value != null
 	}
 
 	fun setBitmapToImageView(currentPhotoId: Int, bitmap: Bitmap) {
@@ -40,6 +40,7 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 			SECOND_PHOTO_ID -> secondPhoto.value = bitmap
 			THIRD_PHOTO_ID -> thirdPhoto.value = bitmap
 		}
+		sendButtonEnable.value = checkFullFields()
 	}
 
 	fun onPhotoClick(i: Int) {
@@ -47,19 +48,18 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 	}
 
 	fun onSendReportButtonClick() {
-		sendButtonEnable.value = false
 		val first64 = bitmapToBase64String(firstPhoto.value ?: return)
 		val second64 = bitmapToBase64String(secondPhoto.value ?: return)
 		val third64 = bitmapToBase64String(thirdPhoto.value ?: return)
 		val images64 = arrayListOf(first64, second64, third64)
-		val location = eventsListener.getLocation()
+		val location = eventsListener.getLocation() ?: return
+		sendButtonEnable.value = false
 		val report = Report(location.latitude, location.longitude, comment.value.orEmpty(), images64)
 		reportRepository.sendReport(report)
 			.subscribe(
 				{
 					clearForm()
 					eventsListener.showSuccessMessage()
-					sendButtonEnable.value = true
 				},
 				{
 					eventsListener.showMessage(it.localizedMessage)
@@ -77,8 +77,9 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 
 	private fun bitmapToBase64String(bitmap: Bitmap): String {
 		val baos = ByteArrayOutputStream()
-		bitmap.compress(Bitmap.CompressFormat.JPEG, QUALITY_COMPRESS_BITMAP, baos)
-		return Arrays.toString(baos.toByteArray())
+		bitmap.compress(Bitmap.CompressFormat.PNG, QUALITY_COMPRESS_BITMAP, baos)
+		val byteArray = baos.toByteArray()
+		return Base64.encodeToString(byteArray, Base64.DEFAULT)
 	}
 
 	fun setEventListener(eventsListener: EventsListener) {
@@ -87,7 +88,7 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 
 	interface EventsListener {
 		fun getPhoto(i: Int)
-		fun getLocation(): Location
+		fun getLocation(): Location?
 		fun showMessage(message: String)
 		fun showSuccessMessage()
 	}
