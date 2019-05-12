@@ -6,6 +6,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ReportApi {
-	@POST("/")
+	@POST("reports")
 	fun sendReport(@Body report: Report): Completable
 }

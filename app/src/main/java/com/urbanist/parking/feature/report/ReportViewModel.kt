@@ -30,7 +30,6 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 			addSource(firstPhoto) { it != null && this.value ?: false}
 			addSource(secondPhoto) { it != null && this.value ?: false}
 			addSource(thirdPhoto) { it != null && this.value ?: false}
-			addSource(comment) { it != "" && this.value ?: false}
 		}
 	}
 
