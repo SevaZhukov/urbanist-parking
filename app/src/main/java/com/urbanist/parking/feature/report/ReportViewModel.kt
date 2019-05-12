@@ -9,6 +9,7 @@ import com.urbanist.parking.feature.report.domain.repository.ReportRepository
 import com.urbanist.parking.feature.report.domain.model.Report
 import io.reactivex.rxkotlin.addTo
 import java.io.ByteArrayOutputStream
+import java.util.*
 import javax.inject.Inject
 
 class ReportViewModel @Inject constructor(private val reportRepository: ReportRepository) : BaseViewModel() {
@@ -46,6 +47,7 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 	}
 
 	fun onSendReportButtonClick() {
+		sendButtonEnable.value = false
 		val first64 = bitmapToBase64String(firstPhoto.value ?: return)
 		val second64 = bitmapToBase64String(secondPhoto.value ?: return)
 		val third64 = bitmapToBase64String(thirdPhoto.value ?: return)
@@ -57,9 +59,11 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 				{
 					clearForm()
 					eventsListener.showSuccessMessage()
+					sendButtonEnable.value = true
 				},
 				{
 					eventsListener.showMessage(it.localizedMessage)
+					sendButtonEnable.value = true
 				}
 			).addTo(disposables)
 	}
@@ -74,7 +78,7 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 	private fun bitmapToBase64String(bitmap: Bitmap): String {
 		val baos = ByteArrayOutputStream()
 		bitmap.compress(Bitmap.CompressFormat.JPEG, QUALITY_COMPRESS_BITMAP, baos)
-		return baos.toByteArray().toString()
+		return Arrays.toString(baos.toByteArray())
 	}
 
 	fun setEventListener(eventsListener: EventsListener) {
