@@ -1,5 +1,15 @@
 package com.urbanist.parking.feature.report.domain.model
 
+import com.google.gson.annotations.SerializedName
 import java.util.ArrayList
 
-class Report(val lat: Double, val lng: Double, val comment: String, val images: ArrayList<String>?)
+class Report(
+	@SerializedName("lat")
+	val lat: Double,
+	@SerializedName("lng")
+	val lng: Double,
+	@SerializedName("comment")
+	val comment: String,
+	@SerializedName("images")
+	val images: ArrayList<String>?
+)
