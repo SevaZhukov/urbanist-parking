@@ -10,10 +10,10 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.urbanist.parking.R
-import com.urbanist.parking.feature.report.ReportActivity
+import com.urbanist.parking.feature.report.presentation.ReportActivity
 import com.urbanist.parking.feature.rules.RulesActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import com.urbanist.parking.feature.main.location_denied.LocationDeniedDialog
+import com.urbanist.parking.feature.main.location.denied.LocationDeniedDialog
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.urbanist.parking.feature.main.location_denied
+package com.urbanist.parking.feature.main.location.denied
 
 import android.app.Dialog
 import android.content.Context

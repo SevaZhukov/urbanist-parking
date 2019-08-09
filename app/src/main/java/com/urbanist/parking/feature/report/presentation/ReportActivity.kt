@@ -1,4 +1,4 @@
-package com.urbanist.parking.feature.report
+package com.urbanist.parking.feature.report.presentation
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,7 +9,6 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.os.Message
 import android.provider.MediaStore
 import android.view.Menu
 import com.urbanist.parking.R
@@ -19,8 +18,6 @@ import javax.inject.Inject
 import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
 import com.urbanist.parking.feature.recomendation.RecommendationActivity
-import com.urbanist.parking.utils.hasNull
-import kotlinx.android.synthetic.main.activity_report.*
 
 class ReportActivity : BaseActivity<ActivityReportBinding>() {
 
@@ -31,7 +28,7 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
 	@Inject
 	lateinit var viewModel: ReportViewModel
 
-	override val layoutId: Int = com.urbanist.parking.R.layout.activity_report
+	override val layoutId: Int = R.layout.activity_report
 
 	override fun initBinding() {
 		requireBinding().viewModel = viewModel
@@ -42,7 +39,8 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
 		viewModel.setEventListener(eventsListener)
 	}
 
-	private val eventsListener: ReportViewModel.EventsListener = object : ReportViewModel.EventsListener {
+	private val eventsListener: ReportViewModel.EventsListener = object :
+		ReportViewModel.EventsListener {
 		override fun getPhoto(i: Int) {
 			openCamera(i)
 		}
