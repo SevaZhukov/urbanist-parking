@@ -35,7 +35,7 @@
 		<activity android:name=".feature.recomendation.RecommendationActivity"/>
 		<activity
 			android:screenOrientation="portrait"
-			android:name=".feature.report.ReportActivity"
+			android:name=".feature.report.presentation.ReportActivity"
 			android:label="@string/report_title"
 			android:parentActivityName=".feature.main.MainActivity"/>
 	</application>

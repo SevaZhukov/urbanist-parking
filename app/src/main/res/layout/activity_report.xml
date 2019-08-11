@@ -8,7 +8,7 @@
 
 		<variable
 			name="viewModel"
-			type="com.urbanist.parking.feature.report.ReportViewModel"/>
+			type="com.urbanist.parking.feature.report.presentation.ReportViewModel"/>
 	</data>
 
 	<ScrollView

@@ -1,17 +1,25 @@
-package com.urbanist.parking.feature.report
+package com.urbanist.parking.feature.report.presentation
 
 import android.graphics.Bitmap
 import android.location.Location
-import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import com.urbanist.parking.core.presentation.BaseViewModel
-import com.urbanist.parking.feature.report.domain.repository.ReportRepository
-import com.urbanist.parking.feature.report.domain.model.Report
+import com.urbanist.parking.feature.report.domain.entity.Report
+import com.urbanist.parking.feature.report.domain.usecase.GetBase64StringFromBitmapUseCase
+import com.urbanist.parking.feature.report.domain.usecase.SendReportUseCase
 import io.reactivex.rxkotlin.addTo
-import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
-class ReportViewModel @Inject constructor(private val reportRepository: ReportRepository) : BaseViewModel() {
+class ReportViewModel @Inject constructor(
+	private val sendReportUseCase: SendReportUseCase,
+	private val getBase64StringFromBitmapUseCase: GetBase64StringFromBitmapUseCase
+) : BaseViewModel() {
+
+	companion object {
+		const val FIRST_PHOTO_ID = 0
+		const val SECOND_PHOTO_ID = 1
+		const val THIRD_PHOTO_ID = 2
+	}
 
 	val firstPhoto = MutableLiveData<Bitmap?>()
 	val secondPhoto = MutableLiveData<Bitmap?>()
@@ -28,10 +36,11 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 		sendButtonEnable.value = false
 	}
 
-	private fun checkFullFields(): Boolean {
-		return firstPhoto.value != null
-			&& secondPhoto.value != null
-			&& thirdPhoto.value != null
+	private fun clearForm() {
+		firstPhoto.value = null
+		secondPhoto.value = null
+		thirdPhoto.value = null
+		comment.value = ""
 	}
 
 	fun setBitmapToImageView(currentPhotoId: Int, bitmap: Bitmap) {
@@ -43,19 +52,25 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 		sendButtonEnable.value = checkFullFields()
 	}
 
+	private fun checkFullFields(): Boolean {
+		return firstPhoto.value != null
+			&& secondPhoto.value != null
+			&& thirdPhoto.value != null
+	}
+
 	fun onPhotoClick(i: Int) {
 		eventsListener.getPhoto(i)
 	}
 
 	fun onSendReportButtonClick() {
-		val first64 = bitmapToBase64String(firstPhoto.value ?: return)
-		val second64 = bitmapToBase64String(secondPhoto.value ?: return)
-		val third64 = bitmapToBase64String(thirdPhoto.value ?: return)
+		val first64 = getBase64StringFromBitmapUseCase(firstPhoto.value ?: return)
+		val second64 = getBase64StringFromBitmapUseCase(secondPhoto.value ?: return)
+		val third64 = getBase64StringFromBitmapUseCase(thirdPhoto.value ?: return)
 		val images64 = arrayListOf(first64, second64, third64)
 		val location = eventsListener.getLocation() ?: return
 		sendButtonEnable.value = false
 		val report = Report(location.latitude, location.longitude, comment.value.orEmpty(), images64)
-		reportRepository.sendReport(report)
+		sendReportUseCase.invoke(report)
 			.subscribe(
 				{
 					clearForm()
@@ -68,20 +83,6 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 			).addTo(disposables)
 	}
 
-	private fun clearForm() {
-		firstPhoto.value = null
-		secondPhoto.value = null
-		thirdPhoto.value = null
-		comment.value = ""
-	}
-
-	private fun bitmapToBase64String(bitmap: Bitmap): String {
-		val baos = ByteArrayOutputStream()
-		bitmap.compress(Bitmap.CompressFormat.PNG, QUALITY_COMPRESS_BITMAP, baos)
-		val byteArray = baos.toByteArray()
-		return Base64.encodeToString(byteArray, Base64.DEFAULT)
-	}
-
 	fun setEventListener(eventsListener: EventsListener) {
 		this.eventsListener = eventsListener
 	}
@@ -91,13 +92,5 @@ class ReportViewModel @Inject constructor(private val reportRepository: ReportRe
 		fun getLocation(): Location?
 		fun showMessage(message: String)
 		fun showSuccessMessage()
-	}
-
-	companion object {
-		const val FIRST_PHOTO_ID = 0
-		const val SECOND_PHOTO_ID = 1
-		const val THIRD_PHOTO_ID = 2
-
-		const val QUALITY_COMPRESS_BITMAP = 100
 	}
 }

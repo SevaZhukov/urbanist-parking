@@ -1,4 +1,4 @@
-package com.urbanist.parking.feature.report.domain.model
+package com.urbanist.parking.feature.report.domain.entity
 
 import com.google.gson.annotations.SerializedName
 import java.util.ArrayList
