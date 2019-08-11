@@ -49,22 +49,17 @@ dependencies {
 	implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
 	implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 
-	implementation "com.google.dagger:dagger:$dagger2_version"
-	implementation "com.google.dagger:dagger-android:$dagger2_version"
-	kapt "com.google.dagger:dagger-compiler:$dagger2_version"
-	implementation "com.google.dagger:dagger-android:$dagger2_version"
-	implementation "com.google.dagger:dagger-android-support:$dagger2_version" // if you use the support libraries
-	kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
+	implementation "com.google.dagger:dagger:$dagger_version"
+	implementation "com.google.dagger:dagger-android:$dagger_version"
+	implementation "com.google.dagger:dagger-android-support:$dagger_version"
+	kapt "com.google.dagger:dagger-compiler:$dagger_version"
+	kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
 	implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
 	implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
 	implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
 
 	implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
-
-	testImplementation 'junit:junit:4.12'
-	testImplementation 'org.mockito:mockito-core:1.10.19'
-	androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
 	implementation project(':memes:mvvm')
 	implementation project(':memes:domain')

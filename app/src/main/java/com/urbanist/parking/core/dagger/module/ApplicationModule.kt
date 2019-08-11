@@ -1,6 +1,5 @@
 package com.urbanist.parking.core.dagger.module
 
-import com.urbanist.parking.core.network.RetrofitModule
 import dagger.Module
 import dagger.android.support.AndroidSupportInjectionModule
 
