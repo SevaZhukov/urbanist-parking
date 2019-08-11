@@ -1,7 +1,6 @@
-package com.urbanist.parking.feature.report.domain.usecase
+package com.urbanist.parking.feature.report.domain.usecase.report
 
 import com.urbanist.parking.feature.report.domain.entity.Report
-import com.urbanist.parking.feature.report.domain.repository.ReportRepository
 import io.reactivex.Completable
 import javax.inject.Inject
 

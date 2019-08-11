@@ -1,7 +1,6 @@
-package com.urbanist.parking.feature.report.domain.usecase
+package com.urbanist.parking.feature.report.domain.usecase.transform
 
 import android.graphics.Bitmap
-import com.urbanist.parking.feature.report.domain.repository.TransformRepository
 import javax.inject.Inject
 
 interface GetBase64StringFromBitmapUseCase {

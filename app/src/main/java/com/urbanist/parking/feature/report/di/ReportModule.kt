@@ -6,21 +6,26 @@ import com.urbanist.parking.feature.report.data.datasource.report.ReportDataSour
 import com.urbanist.parking.feature.report.data.datasource.report.ReportDataSource
 import com.urbanist.parking.feature.report.data.datasource.transform.TransformDataSource
 import com.urbanist.parking.feature.report.data.datasource.transform.TransformDataSourceImpl
-import com.urbanist.parking.feature.report.domain.repository.ReportRepository
+import com.urbanist.parking.feature.report.domain.usecase.report.ReportRepository
 import com.urbanist.parking.feature.report.data.repository.ReportRepositoryImpl
 import com.urbanist.parking.feature.report.data.repository.TransformRepositoryImpl
-import com.urbanist.parking.feature.report.domain.repository.TransformRepository
-import com.urbanist.parking.feature.report.domain.usecase.GetBase64StringFromBitmapUseCase
-import com.urbanist.parking.feature.report.domain.usecase.GetBase64StringFromBitmapUseCaseImpl
-import com.urbanist.parking.feature.report.domain.usecase.SendReportUseCase
-import com.urbanist.parking.feature.report.domain.usecase.SendReportUseCaseImpl
+import com.urbanist.parking.feature.report.domain.usecase.transform.TransformRepository
+import com.urbanist.parking.feature.report.domain.usecase.transform.GetBase64StringFromBitmapUseCase
+import com.urbanist.parking.feature.report.domain.usecase.transform.GetBase64StringFromBitmapUseCaseImpl
+import com.urbanist.parking.feature.report.domain.usecase.report.SendReportUseCase
+import com.urbanist.parking.feature.report.domain.usecase.report.SendReportUseCaseImpl
+import com.urbanist.parking.feature.report.presentation.dagger.ReportActivityModule
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
 
 // TODO разбить на модули
-@Module
-class ReportModule {
+@Module(
+	includes = [
+		ReportActivityModule::class
+	]
+)
+class ReportModule() {
 
 	@Provides
 	@ActivityScope
@@ -36,7 +41,8 @@ class ReportModule {
 
 	@Provides
 	@ActivityScope
-	fun provideSendReportUseCase(reportRepository: ReportRepository): SendReportUseCase = SendReportUseCaseImpl(reportRepository)
+	fun provideSendReportUseCase(reportRepository: ReportRepository): SendReportUseCase =
+		SendReportUseCaseImpl(reportRepository)
 
 	@Provides
 	@ActivityScope

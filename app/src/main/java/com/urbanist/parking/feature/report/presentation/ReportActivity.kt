@@ -12,54 +12,48 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
 import com.urbanist.parking.R
-import com.urbanist.parking.core.presentation.BaseActivity
 import com.urbanist.parking.databinding.ActivityReportBinding
-import javax.inject.Inject
 import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
+import com.memebattle.memes.mvvm.activity.EventsActivity
+import com.urbanist.parking.BR
 import com.urbanist.parking.feature.recomendation.RecommendationActivity
+import javax.inject.Inject
 
-class ReportActivity : BaseActivity<ActivityReportBinding>() {
+class ReportActivity : EventsActivity<ActivityReportBinding, ReportViewModel, ReportViewModel.EventsListener>(),
+					   ReportViewModel.EventsListener {
+
+	override val eventsListener: ReportViewModel.EventsListener = this
+
+	override val layoutId: Int = R.layout.activity_report
+
+	override val viewModelVariableId: Int = BR.viewModel
+
+	@Inject
+	override lateinit var viewModel: ReportViewModel
 
 	private var isLocationEnabled = true
 	private var currentLocation = Location(LocationManager.GPS_PROVIDER)
 	private var currentPhotoId = 0
 
-	@Inject
-	lateinit var viewModel: ReportViewModel
-
-	override val layoutId: Int = R.layout.activity_report
-
-	override fun initBinding() {
-		requireBinding().viewModel = viewModel
+	override fun getPhoto(i: Int) {
+		openCamera(i)
 	}
 
-	override fun initViewModel(state: Bundle?) {
-		viewModel.onBind()
-		viewModel.setEventListener(eventsListener)
+	override fun getLocation() {
+		if (isLocationEnabled.not()) {
+			showMessage(getString(R.string.report_error_location))
+			return
+		}
+		viewModel.sendReport(currentLocation)
 	}
 
-	private val eventsListener: ReportViewModel.EventsListener = object :
-		ReportViewModel.EventsListener {
-		override fun getPhoto(i: Int) {
-			openCamera(i)
-		}
+	override fun showMessage(message: String) {
+		Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+	}
 
-		override fun getLocation(): Location? {
-			if (isLocationEnabled.not()) {
-				showMessage(getString(R.string.report_error_location))
-				return null
-			}
-			return currentLocation
-		}
-
-		override fun showMessage(message: String) {
-			Snackbar.make(binding?.root ?: return, message, Snackbar.LENGTH_SHORT).show()
-		}
-
-		override fun showSuccessMessage() {
-			Snackbar.make(binding?.root ?: return, getString(R.string.report_success), Snackbar.LENGTH_SHORT).show()
-		}
+	override fun showSuccessMessage() {
+		Snackbar.make(binding.root, getString(R.string.report_success), Snackbar.LENGTH_SHORT).show()
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -123,10 +117,5 @@ class ReportActivity : BaseActivity<ActivityReportBinding>() {
 
 		const val CAMERA_PIC_REQUEST = 20000
 		const val DATA_KEY = "data"
-	}
-
-	override fun onDestroy() {
-		super.onDestroy()
-		viewModel.onUnbind()
 	}
 }

@@ -12,10 +12,10 @@ android {
 	compileSdkVersion 28
 	defaultConfig {
 		applicationId "com.urbanist.parking"
-		minSdkVersion 21
-		targetSdkVersion 28
-		versionCode 3
-		versionName "1.1"
+		minSdkVersion min_sdk
+		targetSdkVersion target_sdk
+		versionCode Integer.parseInt(BUILD_CODE)
+		versionName VERSION_NAME
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
 	buildTypes {
@@ -46,26 +46,29 @@ dependencies {
 	implementation "com.karumi:dexter:5.0.0"
 	implementation "com.google.android.material:material:1.0.0"
 
-	//PaperOnBoarding
-	implementation "com.ramotion.paperonboarding:paper-onboarding:$paper_onboarding_version"
+	implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+	implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 
-	//RxKotlin
-	implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlin_version"
-	implementation "io.reactivex.rxjava2:rxjava:$rxJava2_version"
-	implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
-
-	//Dagger 2
 	implementation "com.google.dagger:dagger:$dagger2_version"
+	implementation "com.google.dagger:dagger-android:$dagger2_version"
 	kapt "com.google.dagger:dagger-compiler:$dagger2_version"
 	implementation "com.google.dagger:dagger-android:$dagger2_version"
 	implementation "com.google.dagger:dagger-android-support:$dagger2_version" // if you use the support libraries
 	kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
 
-	//Retrofit2
 	implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
 	implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
 	implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
 
-	//okhttp3
 	implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+
+	testImplementation 'junit:junit:4.12'
+	testImplementation 'org.mockito:mockito-core:1.10.19'
+	androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+
+	implementation project(':memes:mvvm')
+	implementation project(':memes:domain')
+	implementation project(':memes:utils')
+	implementation project(':memes:databinding')
+	implementation project(':memes:benderadapter')
 }
