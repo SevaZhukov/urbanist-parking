@@ -2,21 +2,22 @@ package com.urbanist.parking.feature.report.data.datasource.dagger
 
 import com.urbanist.parking.feature.report.data.datasource.report.ReportApi
 import com.urbanist.parking.feature.report.data.datasource.report.ReportDataSource
-import com.urbanist.parking.feature.report.domain.usecase.transform.GetBase64StringFromBitmapUseCase
-import com.urbanist.parking.feature.report.domain.usecase.transform.TransformRepository
-import dagger.Binds
+import com.urbanist.parking.feature.report.data.datasource.report.ReportDataSourceNetworkImpl
+import com.urbanist.parking.feature.report.data.datasource.transform.TransformDataSource
+import com.urbanist.parking.feature.report.data.datasource.transform.TransformDataSourceImpl
 import dagger.Module
+import dagger.Provides
+import retrofit2.Retrofit
 
-@Module(includes = [ReportDataSourceModule.BindsModule::class])
+@Module
 class ReportDataSourceModule {
 
-	@Module
-	interface BindsModule {
+	@Provides
+	fun provideReportApi(retrofit: Retrofit): ReportApi = retrofit.create(ReportApi::class.java)
 
-		@Binds
-		fun provideReportDataSource(reportApi: ReportApi): ReportDataSource
+	@Provides
+	fun provideTransformDataSource(): TransformDataSource = TransformDataSourceImpl()
 
-		@Binds
-		fun provideGetBase64StringFromBitmapUseCase(transformRepository: TransformRepository): GetBase64StringFromBitmapUseCase
-	}
+	@Provides
+	fun provideReportDataSource(reportApi: ReportApi): ReportDataSource = ReportDataSourceNetworkImpl(reportApi)
 }
