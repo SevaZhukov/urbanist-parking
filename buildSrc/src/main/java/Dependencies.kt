@@ -31,7 +31,9 @@ object Dependencies {
 	val appCompat = "androidx.appcompat:appcompat:${Versions.androidx_appcompat}"
 	val coreKtx = "androidx.core:core-ktx:${Versions.androidx_core}"
 	val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.androidx_constraintlayout}"
-	val material = "com.google.android.material:${Versions.material}"
+	val material = "com.google.android.material:material:${Versions.material}"
+	val recyclerView = "androidx.recyclerview:recyclerview:${Versions.androidx_recyclerview}"
+	val exif = "androidx.exifinterface:exifinterface:${Versions.androidx_exifinterface}"
 
 	val rxjava = "io.reactivex.rxjava2:rxjava:${Versions.rxjava}"
 	val rxandroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxandroid}"
@@ -46,7 +48,7 @@ object Dependencies {
 	val retrofitRxAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
 	val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
 
-	val okhttpInterceptor = "\"com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
+	val okhttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
 
 	val dexter = "com.karumi:dexter:${Versions.dexter}"
 }

@@ -1,0 +1,1 @@
+C:\Users\Seva\Documents\urbanist-parking\buildSrc\build\classes\kotlin\main\Dependencies.class;C:\Users\Seva\Documents\urbanist-parking\buildSrc\build\classes\kotlin\main\Versions.class
