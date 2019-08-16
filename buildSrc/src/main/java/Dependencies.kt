@@ -16,8 +16,6 @@ object Versions {
     const val retrofit = "2.5.0"
     const val okHttp = "3.12.1"
 
-    const val dexter = "5.0.0"
-
     const val target_sdk = 28
     const val compile_sdk = 28
     const val min_sdk = 19
@@ -48,8 +46,6 @@ object Dependencies {
     const val retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
 
     const val okHttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
-
-    const val dexter = "com.karumi:dexter:${Versions.dexter}"
 }
 
 object Modules {

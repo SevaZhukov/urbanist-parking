@@ -42,8 +42,6 @@ dependencies {
 	implementation(Dependencies.coreKtx)
 	implementation(Dependencies.constraintLayout)
 
-	implementation(Dependencies.dexter)
-
 	implementation(Dependencies.material)
 
 	implementation(Dependencies.rxJava)
