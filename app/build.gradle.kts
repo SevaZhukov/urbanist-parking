@@ -36,19 +36,18 @@ android {
 }
 
 dependencies {
-	implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 	implementation(Dependencies.kotlinStandardLibrary)
 
 	implementation(Dependencies.appCompat)
 	implementation(Dependencies.coreKtx)
-	implementation(Dependencies.constraintlayout)
+	implementation(Dependencies.constraintLayout)
 
 	implementation(Dependencies.dexter)
 
 	implementation(Dependencies.material)
 
-	implementation(Dependencies.rxjava)
-	implementation(Dependencies.rxandroid)
+	implementation(Dependencies.rxJava)
+	implementation(Dependencies.rxAndroid)
 
 	implementation(Dependencies.dagger)
 	implementation(Dependencies.daggerAndroid)
@@ -60,11 +59,7 @@ dependencies {
 	implementation(Dependencies.retrofitRxAdapter)
 	implementation(Dependencies.retrofitConverterGson)
 
-	implementation(Dependencies.okhttpInterceptor)
+	implementation(Dependencies.okHttpInterceptor)
 
-	compile(project(":memes:mvvm"))
-	compile(project(":memes:domain"))
-	compile(project(":memes:utils"))
-	compile(project(":memes:databinding"))
-	compile(project(":memes:benderadapter"))
+	Modules.memes.forEach { compile(project(it)) }
 }

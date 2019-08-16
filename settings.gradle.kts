@@ -1,7 +1,3 @@
-include(":app")
+include(Modules.app)
 
-include(":memes:mvvm")
-include(":memes:benderadapter")
-include(":memes:domain")
-include(":memes:utils")
-include(":memes:databinding")
+Modules.memes.forEach { include(it) }
